@@ -2,7 +2,7 @@ from me_collector import db
 
 
 class ProjectDetails(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.String(100), primary_key=True)
     groupName = db.Column(db.String(100), nullable=False)
     groupDescription = db.Column(db.String(1000), nullable=False)
     foundingDate = db.Column(db.String(100), nullable=False)
@@ -31,7 +31,7 @@ class ProjectDetails(db.Model):
     otherDetails = db.Column(db.String(1000), nullable=False)
     projectNumber = db.Column(db.BigInteger, nullable=False)
     projectName = db.Column(db.String(100), nullable=False)
-    projectFocus = db.Column(db.String(100), nullable=False)
+    projectFocus = db.Column(db.String(5000), nullable=False)
     startDate = db.Column(db.String(100), nullable=False)
     endDate = db.Column(db.String(100), nullable=False)
     expectedDate = db.Column(db.String(100), nullable=False)
