@@ -1,10 +1,12 @@
 from me_collector import app, db, api
 from me_collector.config import Config
-from me_collector.routes import Project
+from me_collector.routes import Project, AssetResource
 from me_collector.models import ProjectDetails
 
 # register routes
 api.add_resource(Project, '/project')
+api.add_resource(AssetResource, '/saveAsset')
+
 
 if __name__ == '__main__':
     with app.app_context():

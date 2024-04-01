@@ -1,18 +1,10 @@
 import os
 from flask_restful import Api, Resource, reqparse
-from flask import (
-    Flask,
-    render_template,
-    request,
-    flash,
-    redirect,
-    url_for,
-    jsonify
-)
+from flask import request
 from flask.views import MethodView
 from werkzeug.utils import secure_filename
 from me_collector import app, db
-from .models import ProjectDetails
+from .models import ProjectDetails, PdmAssets
 import json
 import psycopg2
 
@@ -76,4 +68,44 @@ class Project(Resource):
                 "message": f"Error: {e}"
             }
 
+
+class AssetResource(Resource):
+
+    def post(self):
+        try:
+
+            # Access the project Asset
+            project_asset = request.form.get('asset')
+            project_asset = json.loads(project_asset)
+
+            # Process the images
+            images = request.files.getlist('images')
+            # store file names only
+            filenames = []
+            for image in images:
+                if image and allowed_file(image.filename):
+                    filename = secure_filename(image.filename)
+                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    filenames.append(filename)
+
+            # update image path
+            project_asset['asset_photo1'] = filenames[0]
+            project_asset['asset_photo2'] = filenames[1]
+
+            # Save project data to the database
+            project_asset = PdmAssets(**project_asset)
+            db.session.add(project_asset)
+            db.session.commit()
+
+            print("Project Asset:", project_asset)
+
+            return {
+                "message": "Asset saved successfully!!"
+            }
+
+        except Exception as e:
+            print(">>>>>>>>>>>>>", e)
+            return {
+                "message": f"Error: {e}"
+            }
 

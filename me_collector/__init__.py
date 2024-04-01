@@ -7,6 +7,7 @@ import urllib.parse
 app = Flask(__name__)
 api = Api(app)
 
+
 password_with_special_chars = "Arua@2020*+"
 
 #Encode the password

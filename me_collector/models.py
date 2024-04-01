@@ -68,7 +68,24 @@ class ProjectDetails(db.Model):
     milestonePhotoFourPath = db.Column(db.String(200), nullable=False)
 
 
-
-
-
+class PdmAssets(db.Model):
+    __tablename__ = 'pdm_assets'
+    id = db.Column(db.BigInteger, primary_key=True)
+    geom = db.Column(db.String)
+    uuid = db.Column(db.String(254), nullable=False)
+    group_name = db.Column(db.String(254), nullable=False)
+    group_id = db.Column(db.Float, nullable=False)
+    lat_x = db.Column(db.Float, nullable=False)
+    lon_y = db.Column(db.Float, nullable=False)
+    asset_id = db.Column(db.String(254), nullable=False)
+    date_acquired = db.Column(db.Date, nullable=False)
+    asset_name = db.Column(db.String(254), nullable=False)
+    person_incharge = db.Column(db.String(254), nullable=False)
+    asset_description = db.Column(db.String(2000), nullable=False)
+    asset_photo1 = db.Column(db.String(254), nullable=False)
+    asset_photo2 = db.Column(db.String(254), nullable=False)
+    created_by = db.Column(db.String(254), nullable=False)
+    date_created = db.Column(db.Date, nullable=False)
+    updated_by = db.Column(db.String(254), nullable=False)
+    date_updated = db.Column(db.Date, nullable=False)
 
