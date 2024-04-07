@@ -1,12 +1,13 @@
 from me_collector import app, db, api
 from me_collector.config import Config
-from me_collector.routes import Project, AssetResource, BeneficiaryResource
+from me_collector.routes import Project, AssetResource, BeneficiaryResource, EnterpriseResource
 from me_collector.models import ProjectDetails
 
 # register routes
 api.add_resource(Project, '/project')
 api.add_resource(AssetResource, '/saveAsset')
 api.add_resource(BeneficiaryResource, '/saveBeneficiary')
+api.add_resource(EnterpriseResource, '/saveEnterprise')
 
 
 if __name__ == '__main__':

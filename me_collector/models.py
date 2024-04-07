@@ -116,7 +116,24 @@ class PdmBeneficiaries(db.Model):
     lat_x = db.Column(db.Float, nullable=False)
     lon_y = db.Column(db.Float, nullable=False)
 
-
-
-
-
+class PdmEnterprises(db.Model):
+    __tablename__ = "pdm_enterprises"
+    id = db.Column(db.BigInteger, primary_key=True)
+    geom = db.Column(db.String)
+    uuid = db.Column(db.String(254), nullable=False)
+    group_name = db.Column(db.String(254), nullable=False)
+    group_id = db.Column(db.Float, nullable=False)
+    reg_status = db.Column(db.String(254), nullable=False)
+    activation = db.Column(db.String(254), nullable=False)
+    fundig_typ = db.Column(db.String(254), nullable=False)
+    amount = db.Column(db.String(254), nullable=False)
+    district = db.Column(db.String(254), nullable=False)
+    subcounty = db.Column(db.String(254), nullable=False)
+    parish = db.Column(db.String(254), nullable=False)
+    village = db.Column(db.String(254), nullable=False)
+    created_by = db.Column(db.String(254), nullable=False)
+    date_creat = db.Column(db.String(254), nullable=False)
+    updated_by = db.Column(db.String(254), nullable=False)
+    date_updat = db.Column(db.String(254), nullable=False)
+    lat_x = db.Column(db.Float, nullable=False)
+    lon_y = db.Column(db.Float, nullable=False)
