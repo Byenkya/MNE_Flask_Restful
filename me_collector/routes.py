@@ -4,7 +4,7 @@ from flask import request
 from flask.views import MethodView
 from werkzeug.utils import secure_filename
 from me_collector import app, db
-from .models import ProjectDetails, PdmAssets
+from .models import ProjectDetails, PdmAssets, PdmBeneficiaries
 import json
 import psycopg2
 
@@ -105,7 +105,34 @@ class AssetResource(Resource):
 
         except Exception as e:
             print(">>>>>>>>>>>>>", e)
+
             return {
                 "message": f"Error: {e}"
             }
 
+
+class BeneficiaryResource(Resource):
+
+    def post(self):
+        try:
+            # Access the project Asset
+            project_beneficiary = request.form.get('beneficiary')
+            project_beneficiary = json.loads(project_beneficiary)
+
+            # Save project data to the database
+            project_beneficiary = PdmBeneficiaries(**project_beneficiary)
+            db.session.add(project_beneficiary)
+            db.session.commit()
+
+            print("Project Beneficiary:", project_beneficiary)
+
+            return {
+                "message": "Beneficiary saved successfully!!"
+            }
+
+        except Exception as e:
+            print("**************", e)
+
+            return {
+                "message": f"Error: {e}"
+            }
