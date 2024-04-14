@@ -137,3 +137,11 @@ class PdmEnterprises(db.Model):
     date_updat = db.Column(db.String(254), nullable=False)
     lat_x = db.Column(db.Float, nullable=False)
     lon_y = db.Column(db.Float, nullable=False)
+
+class PdmGroups(db.Model):
+    __tablename__ = "pdm_groups"
+    id = db.Column(db.BigInteger, primary_key=True)
+    name = db.Column(db.String(254), nullable=False)
+    descr = db.Column(db.String(1000), nullable=False)
+
+

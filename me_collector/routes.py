@@ -4,7 +4,7 @@ from flask import request
 from flask.views import MethodView
 from werkzeug.utils import secure_filename
 from me_collector import app, db
-from .models import ProjectDetails, PdmAssets, PdmBeneficiaries, PdmEnterprises
+from .models import ProjectDetails, PdmAssets, PdmBeneficiaries, PdmEnterprises, PdmGroups
 import json
 import psycopg2
 
@@ -155,6 +155,32 @@ class EnterpriseResource(Resource):
 
             return {
                 "message": "Enterprise saved successfully!!"
+            }
+
+        except Exception as e:
+            print("**************", e)
+
+            return {
+                "message": f"Error: {e}"
+            }
+class GroupResource(Resource):
+
+    def post(self):
+        try:
+            # Access the project Asset
+            print(request.form)
+            project_group = request.form.get('group')
+            project_group = json.loads(project_group)
+
+            # Save project data to the database
+            project_group = PdmGroups(**project_group)
+            db.session.add(project_group)
+            db.session.commit()
+
+            print("Project Group:", project_group)
+
+            return {
+                "message": "Group saved successfully!!"
             }
 
         except Exception as e:
