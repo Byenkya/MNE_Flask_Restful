@@ -70,7 +70,7 @@ class ProjectDetails(db.Model):
 
 class PdmAssets(db.Model):
     __tablename__ = 'pdm_assets'
-    id = db.Column(db.BigInteger, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     geom = db.Column(db.String)
     uuid = db.Column(db.String(254), nullable=False)
     group_name = db.Column(db.String(254), nullable=False)
@@ -91,7 +91,7 @@ class PdmAssets(db.Model):
 
 class PdmBeneficiaries(db.Model):
     __tablename__ = 'pdm_beneficiaries'
-    id = db.Column(db.BigInteger, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     geom = db.Column(db.String)
     uuid = db.Column(db.String(254), nullable=False)
     other_name = db.Column(db.String(254), nullable=False)
@@ -118,7 +118,7 @@ class PdmBeneficiaries(db.Model):
 
 class PdmEnterprises(db.Model):
     __tablename__ = "pdm_enterprises"
-    id = db.Column(db.BigInteger, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     geom = db.Column(db.String)
     uuid = db.Column(db.String(254), nullable=False)
     group_name = db.Column(db.String(254), nullable=False)
@@ -140,8 +140,78 @@ class PdmEnterprises(db.Model):
 
 class PdmGroups(db.Model):
     __tablename__ = "pdm_groups"
-    id = db.Column(db.BigInteger, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     name = db.Column(db.String(254), nullable=False)
     descr = db.Column(db.String(1000), nullable=False)
+
+
+class PdmProjects(db.Model):
+    __tablename__ = "pdm_projects"
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    geom = db.Column(db.String)
+    uuid = db.Column(db.String(254), nullable=False)
+    group_id = db.Column(db.BigInteger, nullable=False)
+    group_name = db.Column(db.String(254), nullable=False)
+    proj_no = db.Column(db.String(254), nullable=False)
+    proj_name = db.Column(db.String(254), nullable=False)
+    proj_focus = db.Column(db.String(5000), nullable=False)
+    proj_descr = db.Column(db.String(10000), nullable=False)
+    start_date = db.Column(db.String(254), nullable=False)
+    end_date = db.Column(db.String(254), nullable=False)
+    funded_by = db.Column(db.String(254), nullable=False)
+    amount_ugx = db.Column(db.BigInteger, nullable=False)
+    team_leader = db.Column(db.String(254), nullable=False)
+    email = db.Column(db.String(254), nullable=False)
+    telephone = db.Column(db.String(15), nullable=False)
+    status = db.Column(db.String(254), nullable=False)
+    created_by = db.Column(db.String(254), nullable=False)
+    date_creat = db.Column(db.String(254), nullable=False)
+    updated_by = db.Column(db.String(254), nullable=False)
+    date_updat = db.Column(db.String(254), nullable=False)
+    lat_x = db.Column(db.Float, nullable=False)
+    lon_y = db.Column(db.Float, nullable=False)
+
+class PdmProjectAssessments(db.Model):
+    __tablename__ = "pdm_assessments"
+    id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    geom = db.Column(db.String)
+    uuid = db.Column(db.String(254), nullable=False)
+    group_name = db.Column(db.String(254), nullable=False)
+    group_id = db.Column(db.BigInteger, nullable=False)
+    lat_x = db.Column(db.Float, nullable=False)
+    lon_y = db.Column(db.Float, nullable=False)
+    assessed_by = db.Column(db.String(100), nullable=False)
+    date_assessed = db.Column(db.Date, nullable=False)
+    assess_milestones = db.Column(db.String(254), nullable=False)
+    assessed_for = db.Column(db.String(254), nullable=False)
+    observation = db.Column(db.String(1000), nullable=False)
+    assessed_photo1 = db.Column(db.String(254), nullable=False)
+    assessed_photo2 = db.Column(db.String(254), nullable=False)
+    assessed_photo3 = db.Column(db.String(254), nullable=False)
+    assessed_photo4 = db.Column(db.String(254), nullable=False)
+    milestone_detail = db.Column(db.String(254), nullable=False)
+    milestone_target = db.Column(db.String(254), nullable=False)
+    milestone_target_date = db.Column(db.Date, nullable=False)
+    assigned_to = db.Column(db.String(254), nullable=False)
+    milestone_status = db.Column(db.String(254), nullable=False)
+    milestone_photo1 = db.Column(db.String(254), nullable=False)
+    milestone_photo2 = db.Column(db.String(254), nullable=False)
+    milestone_photo3 = db.Column(db.String(254), nullable=False)
+    milestone_photo4 = db.Column(db.String(254), nullable=False)
+    updated_by = db.Column(db.String(254), nullable=False)
+    date_updated = db.Column(db.Date, nullable=False)
+    project_name = db.Column(db.String(254), nullable=False)
+    project_id = db.Column(db.BigInteger, nullable=False)
+
+
+
+
+
+
+
+
+
+
+
 
 
