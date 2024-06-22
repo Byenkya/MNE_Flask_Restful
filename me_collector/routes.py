@@ -93,7 +93,10 @@ class AssetResource(Resource):
             filenames = []
             for image in images:
                 if image and allowed_file(image.filename):
+                    print("before secure >>>>", image.filename)
                     filename = secure_filename(image.filename)
+                    print("After secure >>>>", filename)
+                    print("File path **************", app.config['UPLOAD_FOLDER'])
                     image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                     filenames.append(filename)
 
@@ -116,7 +119,7 @@ class AssetResource(Resource):
             print(">>>>>>>>>>>>>", e)
 
             return {
-                "message": f"Error: {project_asset}"
+                "message": f"Error: {e}"
             }
 
 
