@@ -42,7 +42,7 @@ class Project(Resource):
             for image in images:
                 if image and allowed_file(image.filename):
                     filename = secure_filename(image.filename)
-                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    image.save(os.path.join("me_collector/static/projectUploads", filename))
                     filenames.append(filename)
 
             # Update project data with image filenames
@@ -94,7 +94,7 @@ class AssetResource(Resource):
             for image in images:
                 if image and allowed_file(image.filename):
                     filename = secure_filename(image.filename)
-                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    image.save(os.path.join("me_collector/static/projectUploads", filename))
                     filenames.append(filename)
 
             # update image path
@@ -267,7 +267,7 @@ class ProjectAssessmentResource(Resource):
             for image in images:
                 if image and allowed_file(image.filename):
                     filename = secure_filename(image.filename)
-                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    image.save(os.path.join("me_collector/static/projectUploads", filename))
                     filenames.append(filename)
 
             # Update project data with image filenames
