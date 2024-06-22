@@ -120,7 +120,7 @@ class AssetResource(Resource):
             print(">>>>>>>>>>>>>", e)
 
             return {
-                "message": f"Error: {e}"
+                "message": f"Error: {str(filenames)}"
             }
 
 class BeneficiaryResource(Resource):
