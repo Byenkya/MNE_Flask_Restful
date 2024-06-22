@@ -79,8 +79,10 @@ class Project(Resource):
 
 
 class AssetResource(Resource):
+
     def post(self):
         try:
+
             # Access the project Asset
             project_asset = request.form.get('asset')
             project_asset = json.loads(project_asset)
@@ -91,26 +93,20 @@ class AssetResource(Resource):
             filenames = []
             for image in images:
                 if image and allowed_file(image.filename):
-                    # Ensure the upload folder exists
-                    upload_folder = app.config['UPLOAD_FOLDER']
-                    if not os.path.exists(upload_folder):
-                        os.makedirs(upload_folder)
-
                     filename = secure_filename(image.filename)
-                    image_path = os.path.join(upload_folder, filename)
-                    image.save(image_path)
+                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                     filenames.append(filename)
 
             # update image path
-            project_asset['asset_photo1'] = filenames[0] if len(filenames) > 0 else None
-            project_asset['asset_photo2'] = filenames[1] if len(filenames) > 1 else None
+            project_asset['asset_photo1'] = filenames[0]
+            project_asset['asset_photo2'] = filenames[1]
 
             # Save project data to the database
-            project_asset_obj = PdmAssets(**project_asset)
-            db.session.add(project_asset_obj)
+            project_asset = PdmAssets(**project_asset)
+            db.session.add(project_asset)
             db.session.commit()
 
-            print("Project Asset:", project_asset_obj)
+            print("Project Asset:", project_asset)
 
             return {
                 "message": "Asset saved successfully!!"
@@ -120,8 +116,9 @@ class AssetResource(Resource):
             print(">>>>>>>>>>>>>", e)
 
             return {
-                "message": f"Error: {str(filenames)}"
+                "message": f"Error: {project_asset}"
             }
+
 
 class BeneficiaryResource(Resource):
 
