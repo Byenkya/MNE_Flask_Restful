@@ -181,6 +181,9 @@ class GroupResource(Resource):
             project_group = request.form.get('group')
             project_group = json.loads(project_group)
 
+            # Remove the id attribute if it exists
+            project_group.pop('id', None)
+
             # Save project data to the database
             project_group = PdmGroups(**project_group)
             db.session.add(project_group)
